@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Árbol Genealógico - Familia Hernández</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #1b1b1b;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  #header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0));
+    color: #fff;
+    padding: 14px 18px 30px 18px;
+    pointer-events: none;
+  }
+  #header h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+  #header p {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    opacity: 0.85;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+  #openseadragon {
+    width: 100%;
+    height: 100%;
+  }
+  #loading {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 14px;
+    background: #1b1b1b;
+    z-index: 5;
+  }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>Árbol Genealógico &mdash; Familia Hernández</h1>
+  <p>Usa el mouse (rueda) o los dedos (pellizcar) para acercar y explorar cada foto</p>
+</div>
+
+<div id="loading">Cargando árbol genealógico&hellip;</div>
+<div id="openseadragon"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js"></script>
+<script>
+  var viewer = OpenSeadragon({
+    id: "openseadragon",
+    prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/images/",
+    tileSources: "img.dzi",
+    showNavigator: true,
+    navigatorPosition: "BOTTOM_RIGHT",
+    minZoomImageRatio: 0.8,
+    maxZoomPixelRatio: 4,
+    visibilityRatio: 1,
+    constrainDuringPan: true,
+    gestureSettingsMouse: { clickToZoom: false },
+    animationTime: 0.6,
+    springStiffness: 8
+  });
+
+  viewer.addHandler("open", function() {
+    document.getElementById("loading").style.display = "none";
+  });
+</script>
+
+</body>
+</html>
